@@ -36,6 +36,7 @@ package {
 		private static var _addDir:Boolean;
 		public static function Export(psdObject:Object,psdName:String,dirPath:String,addName:Boolean,addDir:Boolean):void
 		{
+		
 			_fileName = psdName.replace(".psd","");
 			_addName = addName;
 			_addDir = addDir;
