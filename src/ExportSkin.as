@@ -161,7 +161,7 @@ package {
 				image9:"Image9",img9:"Image9",sb:"Image9",scalebitmap:"Image9",
 				label:"Label",lb:"Label",Text:"Label",ll:"Label",txt:"Label",
 				radiobuttongroup:"RadioButtonGroup",rbg:"RadioButtonGroup",
-				radiobutton:"Radiobutton",rb:"Radiobutton",
+				radiobutton:"RadioButton",rb:"RadioButton",
 				dragbar:"DragBar",db:"DragBar",drag:"DragBar",
 				list:"List",li:"List",lt:"List",ls:"List",
 				scrollbar:"ScrollBar",slb:"ScrollBar",srb:"ScrollBar",
