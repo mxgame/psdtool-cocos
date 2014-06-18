@@ -135,10 +135,10 @@ package {
 		private static function parseSuffix(name:String,ary:Array):void
 		{
 			var suffixMap:Object = {
-				normal:"normal",nl:"normal",
-				down:"down",dn:"down",
-				over:"over",or:"over",
-				disable:"disable",de:"disable"
+				normal:"normal",nl:"normal",nm:"normal",n:"normal",
+				down:"down",dn:"down",d:"down",
+				over:"over",or:"over",ov:"over",o:"over",
+				disable:"disable",de:"disable",dis:"disable"
 			}
 			var index:int = name.indexOf("_");
 			if(-1 == index)
@@ -158,19 +158,18 @@ package {
 			var map:Object = {
 				image:"Image",img:"Image",bitmap:"Image",bit:"Image",bmp:"Image",
 				button:"Button",btn:"Button",bt:"Button",
-				scalebitmap:"ScaleBitmap",sb:"ScaleBitmap",scaleimage:"ScaleBitmap",sm:"ScaleBitmap",
-				label:"Label",lb:"Label",la:"Label",ll:"Label",
+				image9:"Image9",img9:"Image9",sb:"Image9",scalebitmap:"Image9",
+				label:"Label",lb:"Label",Text:"Label",ll:"Label",txt:"Label",
 				radiobuttongroup:"RadioButtonGroup",rbg:"RadioButtonGroup",
 				radiobutton:"Radiobutton",rb:"Radiobutton",
-				dragbar:"DragBar",db:"DragBar",
-				list:"List",li:"List",lt:"List",
-				scrollbar:"ScrollBar",slb:"ScrollBar",
+				dragbar:"DragBar",db:"DragBar",drag:"DragBar",
+				list:"List",li:"List",lt:"List",ls:"List",
+				scrollbar:"ScrollBar",slb:"ScrollBar",srb:"ScrollBar",
 				slider:"Slider",sd:"Slider",
 				combobox:"ComboBox",cb:"ComboBox",
 				stepper:"Stepper",sp:"Stepper",
 				container:"Container",ct:"Container",
-				progress:"Progress",pg:"Progress"
-								
+				progress:"Progress",pg:"Progress"								
 			};
 			
 
