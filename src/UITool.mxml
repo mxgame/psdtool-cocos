@@ -7,6 +7,9 @@
 			import com.PSDParser.PSDLayer;
 			import com.PSDParser.PSDParser;
 			
+			import flash.desktop.NativeApplication;
+			import flash.events.InvokeEvent; 
+			
 			private static var file:File=new File;
 			private static var fileStream:FileStream=new FileStream;
 			private static var psdParser:PSDParser;
@@ -15,8 +18,40 @@
 			private var openFilePath:String;
 			private var saveFilePath:String;
 			
+			var arguments:Array; 
+			var currentDir:File; 
+			public function onInvokeEvent(invocation:InvokeEvent):void { 
+				var now:String = new Date().toTimeString(); 
+				print("Invoke event received: " + now); 
+				
+				if (invocation.currentDirectory != null) 
+				{ 
+					print("Current directory=" + invocation.currentDirectory.nativePath); 
+				}  
+				else  
+				{ 
+					print("--no directory information available--"); 
+				} 
+				
+				if (invocation.arguments.length > 0) 
+				{ 
+					//var filePath:String = 
+					print("Arguments: " + invocation.arguments.toString());
+					file.nativePath = invocation.arguments[0];
+					
+					openFilePath = file.nativePath;
+					saveFilePath = file.nativePath.replace(".psd","");
+					readFile(openFilePath);
+				}  
+				else  
+				{ 
+					print("--no arguments--"); 
+				} 
+			} 
+			
 			private function init(e:Event):void
 			{
+				NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, onInvokeEvent); 
 				txtPrint=txtTrace;
 				file.addEventListener(Event.SELECT, onFileSelected);
 			}
@@ -98,8 +133,17 @@
 			
 			private function onExport(psdName:String, psdObject:Object):void
 			{				
-				ExportUIRes.Export(psdObject,psdName,saveFilePath,chkFileName.selected,chkDirName.selected);
+				ExportUIRes.Export(psdObject,psdName,saveFilePath,chkFileName.selected,chkDirName.selected,onComplete);
 				ExportSkin.Export(psdObject,psdName,saveFilePath,chkFileName.selected,chkDirName.selected);
+			}
+			
+			private static function onComplete(_completeFileList:Array):void
+			{
+				print("completa all!!!");
+				for(var i:int=0;i<_completeFileList.length;i++)
+				{
+					print(_completeFileList[i]+"\n");
+				}
 			}
 			
 			private static var printContent:Array=[];

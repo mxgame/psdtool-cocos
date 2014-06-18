@@ -18,7 +18,12 @@ package
 		private static var _addName:Boolean;
 		private static var _addDir:Boolean;
 		private static var _fileListXml:XML = <data/>;
-		public static function Export(psdObject:Object,psdName:String, dirPath:String,addName:Boolean,addDir:Boolean):void
+		
+		private static var _fileCounter:int = 0;
+		private static var _completeAllCallback:Function;
+		private static var _completeFileList:Array=[];
+		
+		public static function Export(psdObject:Object,psdName:String, dirPath:String,addName:Boolean,addDir:Boolean,callback:Function):void
 		{
 			_fileName = psdName.replace(".psd","");
 			_dirName = dirPath.substring(0,dirPath.lastIndexOf("\\"));
@@ -28,6 +33,7 @@ package
 			_dirPath = dirPath;
 			layerNameObject={};
 			_fileListXml = <data/>
+			_completeAllCallback = callback;
 			readPsdLayer(psdObject.list);
 			var xmlSavePath:String = _dirPath + "\\" + _fileName + ".xml";
 			utils.writeXmlAsync(xmlSavePath, _fileListXml.toXMLString(), null);			
@@ -67,7 +73,7 @@ package
 			if(children == null)return;
 
 			var path:String;
-			var name:String;				
+			var name:String;	
 			for(var i:int = children.length - 1; i >= 0; i--)
 			{					
 				if(children[i] is PSDLayer)
@@ -85,6 +91,7 @@ package
 						if(!layerNameObject.hasOwnProperty(path))
 						{
 							layerNameObject[path] = psdLayer.name;
+							_fileCounter++;
 							if(IS_JPG)
 							{
 								utils.writeFileAsync(path,jpgEncoder.encode(psdLayer.bmp),onComplete);
@@ -120,6 +127,15 @@ package
 		private static function onComplete(path:String,flag:Boolean):void
 		{
 			utils.print("写入PSD图层名：",layerNameObject[path],"到文件路径：",path,flag?"成功":"失败");
+			_completeFileList.push(path);
+			_fileCounter--;
+			if(_fileCounter == 0)
+			{
+				if(_completeAllCallback != null) 
+				{
+					_completeAllCallback(_completeFileList);
+				}
+			}
 		}
 	}
 }
