@@ -208,14 +208,19 @@ package com.PSDParser
 					case "lsct": readLayerSectionDevider(); break;
 					
 					//------------------------------------------------------------- get layer unicode name
-					case "luni": nameUNI 	= fileData.readUTFBytes(4); break;
+					//case "luni": nameUNI 	= fileData.readUTFBytes(size); break;
+					case "luni": 
+						var ii:int = fileData.readUnsignedInt();
+						nameUNI 	= fileData.readMultiByte(ii*2, "unicodeFFFE"/*"unicode""shift-jis"*/); 
+						name 	= nameUNI; 
+						break;
 					
 					//------------------------------------------------------------- get layer effects
 					case "lrFX": parseLayerEffects(); break;
 					//读取文本工具信息
 					case "tySh": readLayerTypeTool(); break;
 					//读取文本工具信息	// Type tool object setting (Photoshop 6.0)
-					case "TySh": readLayerTypeTool6_0(); break;
+					case "TySh": readLayerTypeTool6_0(); break;	//未解析的其他标签：clbl infx knko lspf lclr shmd cust fxrp
 				}
 				
 				fileData.position += prevPos + size - fileData.position;
