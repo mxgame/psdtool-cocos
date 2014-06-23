@@ -209,7 +209,7 @@ package {
 		
 		private static function typeIndex(name:String):int
 		{
-			var typeArr:Array = ["Image","Bitmap","ScaleBitmap","Label","Button","RadioButtonGroup",
+			var typeArr:Array = ["Image","Bitmap","Image9","Label","Button","RadioButtonGroup",
 				"RadioButton","DragBar","List","ScrollBar","Slider","ComboBox","Stepper","Container","Progress"];
 			for(var i:int = 0; i< typeArr.length; i++)
 			{
@@ -240,7 +240,7 @@ package {
 			{
 				parseImageFolder(skinData,ary[1], folder, tabCnt);
 			}
-			else if(type == "ScaleBitmap")
+			else if(type == "Image9")
 			{
 				var value:Array = [8,8,8,8,3,3];	//top right bottom left midWidth midHeight
 				if(ary[2] != "")
@@ -453,7 +453,7 @@ package {
 			}
 			else
 			{
-				if(ary[0] == "ScaleBitmap")
+				if(ary[0] == "Image9")
 				{
 					var value:Array = [8,8,8,8,3,3];	//top right bottom left midWidth midHeight
 					if(ary[2] != "")
