@@ -48,6 +48,13 @@ def generateSheet(dir,plist,png):
 	print(sysCmd)
 	os.system(sysCmd)
 
+def rmTrees(topPath):
+	for root,dirs,files in os.walk(topPath,topdown=False):
+		for name in files:
+			os.remove(os.path.join(root,name))
+		for name in dirs:
+			os.rmdirs(os.path.join(root,name))
+
 
 
 if __name__ == "__main__":
@@ -75,5 +82,6 @@ if __name__ == "__main__":
 	print('rootpath=' + rootpath)
 	print('targetDir=' + targetDir)
 
+	rmTrees(targetDir)
 	generate()
 	os.system('start ' + os.path.join(rootpath,basename) )
