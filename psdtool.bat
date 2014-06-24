@@ -1,2 +1,2 @@
-python "%~dp0/uitool.py %*"
+python "%~dp0/uitool.py" %*
 
