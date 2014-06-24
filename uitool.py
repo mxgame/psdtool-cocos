@@ -39,10 +39,13 @@ def cutPSD(filepath):
 def generateSheet(dir,plist,png):
 	source = ''
 	list = os.listdir(dir)
-	#todo 公共资源不打包
+	#处理公共资源不打包
+	#判断图层前缀是否与最终的资源文件名一致
+	basePrefix = os.path.basename(png).split('.')[0] 
 	for line in list:
-		source += os.path.join(dir,line)
-		source += ' '
+		if line.split('.')[0] == basePrefix:
+			source += os.path.join(dir,line)
+			source += ' '
 	sysCmd = ''
 	sysCmd = 'Texturepacker  --size-constraints NPOT --format cocos2d --data %s --sheet %s %s ' % (plist, png,source)
 	print(sysCmd)
@@ -71,7 +74,7 @@ if __name__ == "__main__":
 	if not os.path.exists(targetFile):
 		print(targetFile + ' not exits')
 		exit(1)
-
+	
 	rootpath = os.path.dirname(targetFile)
 	#转成大写
 	basename = os.path.basename(targetFile).capitalize()
