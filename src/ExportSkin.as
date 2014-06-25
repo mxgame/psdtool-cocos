@@ -618,8 +618,9 @@ package {
 					}
 				}
 			}
-			
-			skinData.writeUTFBytes(formate(FMT_LABEL,tabStr(tabCnt),name,status, layer.textContent.replace("\r","\\r"), 
+			//var myPattern:RegExp = /sh/g; var str:String = "She sells seashells by the seashore."; trace(str.replace(myPattern, "sch")); 
+			var myPattern:RegExp = /\r/g;
+			skinData.writeUTFBytes(formate(FMT_LABEL,tabStr(tabCnt),name,status, layer.textContent.replace(myPattern,"\\r"), 
 				layer.rawData.DocumentResources.FontSet[0].Name[font].replace("\ufeff",""), size,bold,italic,r,g,b));
 		}	
 		
