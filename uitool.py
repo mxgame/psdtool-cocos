@@ -9,6 +9,7 @@
 
 import sys
 import os
+import shutil
 
 BasePSDDir = 'D:\\kof\\art\\'
 
@@ -59,10 +60,19 @@ def rmTrees(topPath):
 			os.rmdirs(os.path.join(root,name))
 
 
+def copyFiles(copyDestDir):
+	plist = os.path.join(rootpath,basename + '/' + basename.capitalize() + '.plist')
+	png = os.path.join(rootpath,basename + '/' + basename.capitalize() + '.png')
+	skin = os.path.join(rootpath,basename + '/' + basename.capitalize() + 'Skin.lua')
+	shutil.copyfile(plist, copyDestDir + '/' + basename.capitalize() + '.plist')
+	shutil.copyfile(png, copyDestDir  + '/' +  basename.capitalize() + '.png' )
+	shutil.copyfile(skin, copyDestDir  + '/' +  basename.capitalize() + 'Skin.lua' )
+
+
 
 if __name__ == "__main__":
-	print(sys.path)
 	print(sys.argv)
+	#arg[1]:源文件
 	if len(sys.argv) >1 and sys.argv[1]:
 		targetFile = sys.argv[1]
 	else:
@@ -74,9 +84,14 @@ if __name__ == "__main__":
 	if not os.path.exists(targetFile):
 		print(targetFile + ' not exits')
 		exit(1)
+
+	#arg[2]:需要拷贝到的目标路径
+	copyDestDir = ''
+	if len(sys.argv) > 2 and sys.argv[2]:
+		copyDestDir = sys.argv[2]
 	
+	#configure
 	rootpath = os.path.dirname(targetFile)
-	#转成大写
 	basename = os.path.basename(targetFile).capitalize()
 	targetFile = os.path.join(rootpath,basename)
 
@@ -85,6 +100,18 @@ if __name__ == "__main__":
 	print('rootpath=' + rootpath)
 	print('targetDir=' + targetDir)
 
+	#run>>>>>>
 	rmTrees(targetDir)
 	generate()
-	os.system('start ' + os.path.join(rootpath,basename) )
+
+	#end
+	if len(copyDestDir)>0:
+		#拷贝文件
+		copyFiles(copyDestDir)
+		os.system('start ' + copyDestDir )
+	else:
+		os.system('start ' + os.path.join(rootpath,basename) )
+	
+
+
+		
