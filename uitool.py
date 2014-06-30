@@ -27,8 +27,8 @@ def generate():
 	#切图
 	cutPSD(targetFile)
 	#拼接
-	plist = os.path.join(rootpath,basename + '/' + basename.capitalize() + '.plist')
-	png = os.path.join(rootpath,basename + '/' + basename.capitalize() + '.png')
+	plist = os.path.join(rootpath,basename + '/' + basename + '.plist')
+	png = os.path.join(rootpath,basename + '/' + basename + '.png')
 	generateSheet(targetDir,plist,png)
 
 def cutPSD(filepath):
@@ -61,12 +61,12 @@ def rmTrees(topPath):
 
 
 def copyFiles(copyDestDir):
-	plist = os.path.join(rootpath,basename + '/' + basename.capitalize() + '.plist')
-	png = os.path.join(rootpath,basename + '/' + basename.capitalize() + '.png')
-	skin = os.path.join(rootpath,basename + '/' + basename.capitalize() + 'Skin.lua')
-	shutil.copyfile(plist, copyDestDir + '/' + basename.capitalize() + '.plist')
-	shutil.copyfile(png, copyDestDir  + '/' +  basename.capitalize() + '.png' )
-	shutil.copyfile(skin, copyDestDir  + '/' +  basename.capitalize() + 'Skin.lua' )
+	plist = os.path.join(rootpath,basename + '/' + basename + '.plist')
+	png = os.path.join(rootpath,basename + '/' + basename + '.png')
+	skin = os.path.join(rootpath,basename + '/' + basename + 'Skin.lua')
+	shutil.copyfile(plist, copyDestDir + '/' + basename + '.plist')
+	shutil.copyfile(png, copyDestDir  + '/' +  basename + '.png' )
+	shutil.copyfile(skin, copyDestDir  + '/' +  basename + 'Skin.lua' )
 
 
 
@@ -92,7 +92,7 @@ if __name__ == "__main__":
 	
 	#configure
 	rootpath = os.path.dirname(targetFile)
-	basename = os.path.basename(targetFile).capitalize()
+	basename = os.path.basename(targetFile)
 	targetFile = os.path.join(rootpath,basename)
 
 	basename = os.path.basename(targetFile).replace('.psd','')
