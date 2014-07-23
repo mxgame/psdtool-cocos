@@ -39,6 +39,7 @@ package com.PSDParser
 		public var filters_arr				: Array; //filters array	
 		
 		public var typeTool					:TypeTool;	//扩展
+		public var textTransfrom			:TextTransform;	//文本变换矩阵
 		public var textContent				:String;	//文本内容
 		public var rawData					:Object;	//原始数据对象
 			
@@ -469,8 +470,17 @@ package com.PSDParser
 		{
 			//Version ( =1 for Photoshop 6.0)
 			var version:int = fileData.readShort();			
+			
 			//Transform: xx, xy, yx, yy, tx, and ty respectively.	length:6×8
-			fileData.position += 48;	//skip 跳过
+			textTransfrom = new TextTransform();
+			textTransfrom.xx = fileData.readDouble();
+			textTransfrom.xy = fileData.readDouble();
+			textTransfrom.yx = fileData.readDouble();
+			textTransfrom.yy = fileData.readDouble();
+			textTransfrom.tx = fileData.readDouble();
+			textTransfrom.ty = fileData.readDouble();
+			//fileData.position += 48;	//skip 跳过
+			
 			//Text version ( = 50 for Photoshop 6.0)
 			version = fileData.readShort();
 			//Descriptor version ( = 16 for Photoshop 6.0)
@@ -1309,7 +1319,7 @@ package com.PSDParser
 		{
 			/*	结构体包含以下信息
 				AutoKerning = true	
-				AutoLeading = false	
+				AutoLeading = false	  是否自动行间距
 				BaselineDirection = 2	
 				BaselineShift = 0	
 				DLigatures = false	
@@ -1332,7 +1342,7 @@ package com.PSDParser
 				HorizontalScale = 1	
 				Kerning = 0	
 				Language = 0	
-				Leading = 111 [0x6f]	
+				Leading = 111 [0x6f]	行间距
 				Ligatures = false	
 				NoBreak = false	
 				OutlineWidth = 154.69221	
@@ -1349,7 +1359,7 @@ package com.PSDParser
 				StyleRunAlignment = 2	
 				Tracking = 33 [0x21]	
 				Tsume = 0	
-				Underline = false	
+				Underline = false	下划线
 				VerticalScale = 1	
 				YUnderline = 1	
 			*/
@@ -1402,6 +1412,29 @@ package com.PSDParser
 			return null;
 		}
 	}
+}
+//jason
+class TextTransform
+{
+	/*
+	|xx xy 0|	
+	|yx yy 0|
+	|tx ty 1|
+	xx,yy 缩放
+	xy,yx 旋转
+	tx,ty 平移
+	2D变幻：原坐标设为（X,Y,1）;
+			|xx xy 0|	
+	[X,Y,1] |yx yy 0| =  [xx*X + yx*Y + tx ,  xy*X + yy*Y + ty,  1] 	
+			|tx ty 1|
+	*/
+
+	public var xx:Number;
+	public var xy:Number;
+	public var yx:Number;
+	public var yy:Number;
+	public var tx:Number;
+	public var ty:Number;
 }
 class TypeTool
 {

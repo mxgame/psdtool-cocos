@@ -581,7 +581,7 @@ package {
 		}
 		
 		private static function parseLabelLayer(skinData:ByteArray, layer:PSDLayer,tabCnt:int = 0,name:String ="", status:String = "normal"):void
-		{	
+		{ 
 			if(!layer)return;
 			var size:int = 12;
 			var bold:Boolean = false;
@@ -605,7 +605,8 @@ package {
 				}
 				if(format)
 				{
-					if(format.hasOwnProperty("FontSize"))size = format.FontSize;// / 2.1299602;
+					if(format.hasOwnProperty("FontSize"))size = format.FontSize;
+					if(layer.textTransfrom)size = size * Math.min(layer.textTransfrom.xx, layer.textTransfrom.yy); 
 					if(format.hasOwnProperty("FauxBold"))bold = format.FauxBold;
 					if(format.hasOwnProperty("FauxItalic"))italic = format.FauxItalic;
 					if(format.hasOwnProperty("Font"))font = format.Font;
