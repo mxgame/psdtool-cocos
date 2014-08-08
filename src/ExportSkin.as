@@ -165,6 +165,7 @@ package {
 				dragbar:"DragBar",db:"DragBar",drag:"DragBar",
 				list:"List",li:"List",lt:"List",ls:"List",
 				scrollview:"ScrollView",sv:"ScrollView",
+				pageview:"PageView",pv:"PageView",
 				scrollbar:"ScrollBar",slb:"ScrollBar",srb:"ScrollBar",
 				slider:"Slider",sd:"Slider",
 				combobox:"ComboBox",cb:"ComboBox",
