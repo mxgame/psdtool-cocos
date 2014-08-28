@@ -41,10 +41,10 @@ package {
 			_addName = addName;
 			_addDir = addDir;
 			_rawDirName = dirPath;
-			_dirName = dirPath.substring(0,dirPath.lastIndexOf("\\"));
-			_dirName = _dirName.substring(_dirName.lastIndexOf("\\")+1);
+			_dirName = dirPath.substring(0,dirPath.lastIndexOf("/"));
+			_dirName = _dirName.substring(_dirName.lastIndexOf("/")+1);
 			var temp:ByteArray=new ByteArray;
-			utils.readFile(File.applicationDirectory.nativePath+"\\SkinTemplete.lua",temp);
+			utils.readFile(File.applicationDirectory.nativePath+"/SkinTemplete.lua",temp);
 			var tempStr:String = temp.readUTFBytes(temp.bytesAvailable);
 			
 			var bounds:Rectangle = new Rectangle(0,0,psdObject.width,psdObject.height);			
@@ -57,7 +57,7 @@ package {
 			skinData.position=0;
 			var skinStr:String = skinData.readUTFBytes(skinData.bytesAvailable);
 			
-			var savePath:String = dirPath + "\\" + _fileName + "Skin.lua";			
+			var savePath:String = dirPath + "/" + _fileName + "Skin.lua";			
 			utils.writeXmlAsync(savePath,tempStr.replace("{SkinStr}",skinStr),null);
 		}
 		
@@ -505,7 +505,7 @@ package {
 			var tmp:int = top;
 			top = bottom;
 			bottom = tmp;
-			var path:String = _rawDirName + "\\"+ _fileName + "\\"  + name + ".png";
+			var path:String = _rawDirName + "/"+ _fileName + "/"  + name + ".png";
 			
 			var loader:Loader = new Loader();
 			loader.load(new URLRequest(path));

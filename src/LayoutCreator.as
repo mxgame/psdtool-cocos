@@ -57,13 +57,13 @@ package
 		      bytes.clear();  
 			bytes.writeObject(panel);
 			bytes.compress();
-			utils.writeFileAsync(_dirPath+"\\"+_saveFileName,bytes,writeComplete);
+			utils.writeFileAsync(_dirPath+"/"+_saveFileName,bytes,writeComplete);
 			
 		}
 		
 		private static function writeComplete(filePath:String,flag:Boolean):void
 		{
-			utils.print("导出功能模块：",_dirPath+"\\"+_saveFileName,"完成")
+			utils.print("导出功能模块：",_dirPath+"/"+_saveFileName,"完成")
 		}
 	}
 }

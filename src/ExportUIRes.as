@@ -26,8 +26,8 @@ package
 		public static function Export(psdObject:Object,psdName:String, dirPath:String,addName:Boolean,addDir:Boolean,callback:Function):void
 		{
 			_fileName = psdName.replace(".psd","");
-			_dirName = dirPath.substring(0,dirPath.lastIndexOf("\\"));
-			_dirName = _dirName.substring(_dirName.lastIndexOf("\\")+1);
+			_dirName = dirPath.substring(0,dirPath.lastIndexOf("/"));
+			_dirName = _dirName.substring(_dirName.lastIndexOf("/")+1);
 			_addName = addName;
 			_addDir = addDir;
 			_dirPath = dirPath;
@@ -35,7 +35,7 @@ package
 			_fileListXml = <data/>
 			_completeAllCallback = callback;
 			readPsdLayer(psdObject.list);
-			var xmlSavePath:String = _dirPath + "\\" + _fileName + ".xml";
+			var xmlSavePath:String = _dirPath + "/" + _fileName + ".xml";
 			utils.writeXmlAsync(xmlSavePath, _fileListXml.toXMLString(), null);			
 		}
 		
@@ -86,7 +86,7 @@ package
 						&& psdLayer.bmp)
 					{		
 						name = getImgName(utils.replaceLayerName(psdLayer.name)) + suffix;
-						path = _dirPath + "\\"+ _fileName + "\\" + name;
+						path = _dirPath + "/"+ _fileName + "/" + name;
 						
 						if(!layerNameObject.hasOwnProperty(path))
 						{
