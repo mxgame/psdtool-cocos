@@ -22,7 +22,7 @@
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default">
-      <airSettings airCertificatePath="D:/code/UITool/key.p12" airTimestamp="true" version="1">
+      <airSettings airCertificatePath="E:/dev/psdtool-cocos/trunk/keys/tjkey.p12" airTimestamp="true" version="1">
         <airExcludes/>
       </airSettings>
       <actionScriptSettings version="1"/>

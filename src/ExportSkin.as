@@ -171,7 +171,8 @@ package {
 				combobox:"ComboBox",cb:"ComboBox",
 				stepper:"Stepper",sp:"Stepper",
 				container:"Container",ct:"Container",
-				progress:"Progress",pg:"Progress"								
+				progress:"Progress",pg:"Progress",
+				focuslist:"FocusList"
 			};
 			
 
@@ -211,7 +212,7 @@ package {
 		private static function typeIndex(name:String):int
 		{
 			var typeArr:Array = ["Image","Bitmap","Image9","Label","Button","RadioButtonGroup",
-				"RadioButton","DragBar","List","ScrollBar","Slider","ComboBox","Stepper","Container","Progress"];
+				"RadioButton","DragBar","List","ScrollBar","Slider","ComboBox","Stepper","Container","Progress","FocusList"];
 			for(var i:int = 0; i< typeArr.length; i++)
 			{
 				if(name.substr(0,typeArr[i].length) == typeArr[i])
