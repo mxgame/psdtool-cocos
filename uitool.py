@@ -68,6 +68,9 @@ def copyFiles(copyDestDir):
 	shutil.copyfile(png, copyDestDir  + '/' +  basename + '.png' )
 	shutil.copyfile(skin, copyDestDir  + '/' +  basename + 'Skin.lua' )
 
+def webp():
+	png = os.path.join(rootpath,basename + '/' + basename + '.png')
+	os.system("cwebp.bat " + png)
 
 
 if __name__ == "__main__":
@@ -104,6 +107,9 @@ if __name__ == "__main__":
 	rmTrees(targetDir)
 	generate()
 
+	if len(sys.argv) > 3 and sys.argv[3]:
+		webp()
+	
 	#end
 	if len(copyDestDir)>0:
 		#拷贝文件
