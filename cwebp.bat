@@ -5,7 +5,7 @@ cwebp %1 -o %1
 exit
 
 for /R %%i in (*.png) do (
-  cwebp "%%i"
+  cwebp "%%i" -o "%%i"
 )
 
 pause
