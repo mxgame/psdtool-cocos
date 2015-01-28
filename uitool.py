@@ -48,7 +48,8 @@ def generateSheet(dir,plist,png):
 			source += os.path.join(dir,line)
 			source += ' '
 	sysCmd = ''
-	sysCmd = 'Texturepacker  --size-constraints NPOT --format cocos2d --data %s --sheet %s %s ' % (plist, png,source)
+	#sysCmd = 'Texturepacker  --size-constraints NPOT --format cocos2d --data %s --sheet %s %s ' % (plist, png,source)
+	sysCmd = 'Texturepacker  --size-constraints AnySize --format cocos2d --data %s --sheet %s %s ' % (plist, png,source)
 	print(sysCmd)
 	os.system(sysCmd)
 
